@@ -12,18 +12,23 @@ COPY package.json package-lock.json ./
 COPY .swcrc ./
 COPY .env ./
 COPY ecosystem.config.js ./
+COPY tsoa.json ./
 
 # Install dependencies with legacy-peer-deps
 RUN npm install --legacy-peer-deps && npm cache clean --force
+RUN npm audit fix --force
 
 # Copy all source files
 COPY . .
 
 # Run TypeScript build before starting the app
-RUN npm run start:build
+RUN npm run build
 
 # Create lightweight runtime image
 FROM node:22.16.0 AS runner
+
+# Install PM2 globally to make `pm2-runtime` available.
+RUN npm install -g pm2 --force
 
 # Set working directory
 WORKDIR /app

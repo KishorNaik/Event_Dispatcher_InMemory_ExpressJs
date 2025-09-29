@@ -17,11 +17,10 @@ appInstance.initializeErrorHandling();
 const app = appInstance.getServer();
 
 describe(`create_user_endpoint_integration_test`, () => {
-
-  beforeEach(async()=>{
-      // Run Event Dispatcher Worker
-      await runEventDispatcherWorker();
-  });
+	beforeEach(async () => {
+		// Run Event Dispatcher Worker
+		await runEventDispatcherWorker();
+	});
 
 	/*
   Command:
@@ -29,9 +28,9 @@ describe(`create_user_endpoint_integration_test`, () => {
   */
 	it(`should_return_200_when_api_is_called`, async () => {
 		// Request Dto
-		const requestDto = new SenderReceiverRequestDto;
-		requestDto.fullName="kishor naik"
-    requestDto.email="kn@example.com"
+		const requestDto = new SenderReceiverRequestDto();
+		requestDto.fullName = 'kishor naik';
+		requestDto.email = 'kn@example.com';
 
 		const response = await request(app)
 			.post('/api/v1/send-receiver')

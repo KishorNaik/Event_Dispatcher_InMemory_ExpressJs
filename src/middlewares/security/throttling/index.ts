@@ -6,6 +6,7 @@ import {
 } from '@/config/env';
 import { Options, slowDown } from 'express-slow-down';
 import express, { Request, Response, NextFunction } from 'express';
+import { ipKeyGenerator } from 'express-rate-limit';
 
 export const throttlingMiddleware = slowDown({
 	windowMs: parseInt(GLOBAL_WINDOW_MINUTES),
@@ -17,5 +18,14 @@ export const throttlingMiddleware = slowDown({
 			parseInt(SLOW_DOWN_INITIAL_DELAY_MS);
 		return Math.min(calculatedDelay, parseInt(SLOW_DOWN_MAX_DELAY_MS));
 	},
-	keyGenerator: (req: Request) => req.ip,
+	//keyGenerator: (req: Request) => req.ip,
+	keyGenerator: (req: Request) => {
+		// Use API key (or some other identifier) for authenticated users
+		if (typeof req.query.apiKey === 'string') return req.query.apiKey;
+
+		// fallback to IP for unauthenticated users
+		// return req.ip // vulnerable
+		return ipKeyGenerator(req.ip); // better
+	},
+	//validate:{ipv6SubnetOrKeyGenerator: false}
 });

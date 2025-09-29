@@ -1,7 +1,7 @@
 ## Development
 
 #Build Image
-docker build -t my-node-app:latest -f Dockerfile.dev .
+docker build -t my-node-app:latest -f Dockerfile.api.dev .
 
 #Run Container // Dev
 docker run -p 3000:3000 -p 9229:9229 my-node-app:latest
@@ -17,7 +17,7 @@ npm run start
 ## Production
 
 #Build Image
-docker build -t my-node-app:latest -f Dockerfile.prod .
+docker build -t my-node-app:latest -f Dockerfile.api.prod .
 
 #Run Container // Prod
 docker run -p 8080:8080 my-node-app:latest
@@ -66,6 +66,7 @@ Open a terminal.
 Run the command:
 npm --version
 Troubleshooting npm Version Check Errors
+https://github.com/devcontainers/images/issues/1189
 If an error occurs while running the npm --version command:
 Open Command Palette (Ctrl + Shift + P or Cmd + Shift + P on macOS).
 Type and select: Debug: Toggle Auto Attach.

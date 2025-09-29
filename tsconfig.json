@@ -21,6 +21,7 @@
 		"resolveJsonModule": true,
 		"importHelpers": true,
 		"baseUrl": "src",
+		"skipLibCheck": true,
 		"paths": {
 			"@/*": ["*"],
 			"@config": ["config"],
@@ -28,7 +29,8 @@
 			"@middlewares/*": ["middlewares/*"],
 			"@shared/*": ["shared/*"],
 			"@workers/*": ["workers/*"],
-			"@zone/*": ["zone/*"]
+			"@zone/*": ["zone/*"],
+			"@express-rate-limit/*": ["node_modules/express-rate-limit/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.json", ".env"],
