@@ -40,7 +40,11 @@ export class ProducerSendReceiverEndpoint extends Endpoint {
 	@Post()
 	@Produces('application/json')
 	@SuccessResponse(StatusCodes.OK, 'Ok') // Custom success response
-	@Middlewares([ValidationMiddleware(SenderReceiverRequestDto)])
+	@Middlewares([
+		ValidationMiddleware({
+			body: SenderReceiverRequestDto,
+		}),
+	])
 	public async postAsync(
 		@Request() req: express.Request,
 		@Body() body: SenderReceiverRequestDto
